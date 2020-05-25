@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div>
+          <label for="mailId">Email</label>
+          <input
+            type="email"
+            id="mailId"
+            name="email"
+            ngModel
+            class="form-control"
+            required
+            email
+            #email="ngModel">
+          <span *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+          <label for="subscription">Choose Your Subscription</label>
+          <select
+            id="subscription"
+            class="form-control"
+            [ngModel]="defaultSubscription"
+            name="subscription">
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            ngModel
+            class="form-control"
+            required
+            #password="ngModel">
+          <span *ngIf="password.value === '' && password.touched">Please provide a password!</span>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!f.valid && f.touched"
+        >Submit</button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row" *ngIf="submitted">
+    <h3>Your Data</h3>
+    <p>Email: {{ mailDetails.email }} </p>
+    <p>Subscription Package: {{ mailDetails.subscription }} </p>
+    <p>Password: {{ mailDetails.password }} </p>
+  </div>
+</div>
